@@ -1,0 +1,29 @@
+﻿@page "/"
+@using Assignment_CP.Interfaces
+@inject ISystemInfoService SystemInfo
+
+<h3>System Information</h3>
+
+<p>CPU Usage: @cpuUsage %</p>
+<p>Memory Usage: @memoryUsage %</p>
+<p>Disk Usage: @diskUsage %</p>
+
+<button @onclick="Refresh">Refresh</button>
+
+@code {
+    double cpuUsage;
+    double memoryUsage;
+    double diskUsage;
+
+    protected override void OnInitialized()
+    {
+        Refresh();
+    }
+
+    void Refresh()
+    {
+        cpuUsage = SystemInfo.GetCpuUsage();
+        memoryUsage = SystemInfo.GetMemoryUsage();
+        diskUsage = SystemInfo.GetDiskUsage();
+    }
+}
